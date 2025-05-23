@@ -30,6 +30,11 @@ jobs:
           git config --global --type bool push.autoSetupRemote true
 
           git init
+
+          git lfs install
+          git lfs track "*.zip"
+          git add .gitattributes
+
           git remote add origin https://github.com/mpv-easy/mpv-easy-cdn.git
 
           git add .
