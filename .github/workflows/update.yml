@@ -1,0 +1,25 @@
+name: update
+
+permissions:
+  contents: write
+
+on: [push]
+
+defaults:
+  run:
+    shell: bash --noprofile --norc -CeEuo pipefail {0}
+
+jobs:
+  update:
+    needs: create-release
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: robinraju/release-downloader@v1
+        with:
+          repository: 'mpv-easy/mpv-easy'
+          latest: true
+          fileName: '*'
+
+      - name: update
+        run: |
+          ls -l
