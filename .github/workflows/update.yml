@@ -85,6 +85,9 @@ jobs:
       - name: ls
         run: |
           ls -l
+      - name: download scripts
+        run: |
+          bun update.ts
 
       - name: Push changes
         uses: ad-m/github-push-action@master
