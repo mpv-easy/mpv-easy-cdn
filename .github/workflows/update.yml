@@ -37,12 +37,6 @@ jobs:
           git config --global user.name "mpv-easy-cdn"
           git config --global --type bool push.autoSetupRemote true
 
-          git init
-          # git lfs install
-          # git lfs track "*.zip"
-          # git add .gitattributes
-          git remote add origin https://github.com/mpv-easy/mpv-easy-cdn.git
-
           # yt-dlp
           curl -L -o yt-dlp.exe https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.exe
 
@@ -79,9 +73,6 @@ jobs:
           tar -cJf mpv-windows.tar.xz -C mpv-windows .
           rm -rf mpv-windows
 
-          git add .
-          git commit -am "update by ci"
-
       - name: ls
         run: |
           ls -l
@@ -89,6 +80,12 @@ jobs:
         run: |
           bun update.ts
 
+      - name: commit
+        run: |
+          git init
+          git remote add origin https://github.com/mpv-easy/mpv-easy-cdn.git
+          git add .
+          git commit -am "update by ci"
       - name: Push changes
         uses: ad-m/github-push-action@master
         if: github.ref == 'refs/heads/dev'
