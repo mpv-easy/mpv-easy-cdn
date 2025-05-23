@@ -3,7 +3,10 @@ name: update
 permissions:
   contents: write
 
-on: [push]
+on:
+  push:
+    branches:
+      - dev
 
 defaults:
   run:
@@ -22,7 +25,7 @@ jobs:
       - name: update
         run: |
           ls -l
-          rm -rf .git
+          rm -rf -rf .git
 
           git config --global init.defaultBranch main
           git config --global user.email "mpv-easy@mpv.com"
@@ -39,31 +42,31 @@ jobs:
           curl -L -o yt-dlp.exe https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.exe
 
           unzip mpv-easy-windows-full.zip -d mpv-easy-windows-full
-          rm mpv-easy-windows-full.zip
-          rm mpv-easy-windows-full/ffmpeg.exe
-          rm mpv-easy-windows-full/yt-dlp.exe
+          rm -rf mpv-easy-windows-full.zip
+          rm -rf mpv-easy-windows-full/ffmpeg.exe
+          rm -rf mpv-easy-windows-full/yt-dlp.exe
           tar -cJf mpv-easy-windows-full.tar.xz -C mpv-easy-windows-full .
 
           unzip mpv-modernx-windows-full.zip -d mpv-modernx-windows-full
-          rm mpv-modernx-windows-full.zip
-          rm mpv-modernx-windows-full/ffmpeg.exe
-          rm mpv-modernx-windows-full/yt-dlp.exe
+          rm -rf mpv-modernx-windows-full.zip
+          rm -rf mpv-modernx-windows-full/ffmpeg.exe
+          rm -rf mpv-modernx-windows-full/yt-dlp.exe
           tar -cJf mpv-modernx-windows-full.tar.xz -C mpv-modernx-windows-full .
 
           unzip mpv-modernz-windows-full.zip -d mpv-modernz-windows-full
-          rm mpv-modernz-windows-full.zip
-          rm mpv-modernz-windows-full/ffmpeg.exe
-          rm mpv-modernz-windows-full/yt-dlp.exe
+          rm -rf mpv-modernz-windows-full.zip
+          rm -rf mpv-modernz-windows-full/ffmpeg.exe
+          rm -rf mpv-modernz-windows-full/yt-dlp.exe
           tar -cJf mpv-modernz-windows-full.tar.xz -C mpv-modernz-windows-full .
 
           unzip mpv-uosc-windows-full.zip -d mpv-uosc-windows-full
-          rm mpv-uosc-windows-full.zip
-          rm mpv-uosc-windows-full/ffmpeg.exe
-          rm mpv-uosc-windows-full/yt-dlp.exe
+          rm -rf mpv-uosc-windows-full.zip
+          rm -rf mpv-uosc-windows-full/ffmpeg.exe
+          rm -rf mpv-uosc-windows-full/yt-dlp.exe
           tar -cJf mpv-uosc-windows-full.tar.xz -C mpv-uosc-windows-full .
 
-          unzip mpv-windows.zip -d mpv-windows.zip
-          rm mpv-easy-windows-full.zip
+          unzip mpv-windows.zip -d mpv-windows
+          rm -rf mpv-windows.zip
           tar -cJf mpv-windows.tar.xz -C mpv-windows .
 
           git add .
@@ -71,9 +74,9 @@ jobs:
 
       - name: Push changes
         uses: ad-m/github-push-action@master
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/dev'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
+          branch: main
           # force_with_lease: true
           force: true
