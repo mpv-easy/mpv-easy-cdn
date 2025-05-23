@@ -46,28 +46,33 @@ jobs:
           rm -rf mpv-easy-windows-full/ffmpeg.exe
           rm -rf mpv-easy-windows-full/yt-dlp.exe
           tar -cJf mpv-easy-windows-full.tar.xz -C mpv-easy-windows-full .
+          rm -rf mpv-easy-windows-full
 
           unzip mpv-modernx-windows-full.zip -d mpv-modernx-windows-full
           rm -rf mpv-modernx-windows-full.zip
           rm -rf mpv-modernx-windows-full/ffmpeg.exe
           rm -rf mpv-modernx-windows-full/yt-dlp.exe
           tar -cJf mpv-modernx-windows-full.tar.xz -C mpv-modernx-windows-full .
+          rm -rf mpv-modernx-windows-full
 
           unzip mpv-modernz-windows-full.zip -d mpv-modernz-windows-full
           rm -rf mpv-modernz-windows-full.zip
           rm -rf mpv-modernz-windows-full/ffmpeg.exe
           rm -rf mpv-modernz-windows-full/yt-dlp.exe
           tar -cJf mpv-modernz-windows-full.tar.xz -C mpv-modernz-windows-full .
+          rm -rf mpv-modernz-windows-full
 
           unzip mpv-uosc-windows-full.zip -d mpv-uosc-windows-full
           rm -rf mpv-uosc-windows-full.zip
           rm -rf mpv-uosc-windows-full/ffmpeg.exe
           rm -rf mpv-uosc-windows-full/yt-dlp.exe
           tar -cJf mpv-uosc-windows-full.tar.xz -C mpv-uosc-windows-full .
+          rm -rf mpv-uosc-windows-full
 
           unzip mpv-windows.zip -d mpv-windows
           rm -rf mpv-windows.zip
           tar -cJf mpv-windows.tar.xz -C mpv-windows .
+          rm -rf mpv-windows
 
           git add .
           git commit -am "update by ci"
