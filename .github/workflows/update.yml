@@ -16,6 +16,11 @@ jobs:
   update:
     runs-on: ubuntu-24.04
     steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
       - uses: robinraju/release-downloader@v1
         with:
           repository: "mpv-easy/mpv-easy"
