@@ -25,6 +25,8 @@ jobs:
           rm -rf .git
 
           git config --global init.defaultBranch main
+          git config --global user.email "mpv-easy@mpv.com"
+          git config --global user.name "mpv-easy-cdn"
 
           git init
           git remote add origin https://github.com/mpv-easy/mpv-easy-cdn.git
