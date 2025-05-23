@@ -27,6 +27,7 @@ jobs:
           git config --global init.defaultBranch main
           git config --global user.email "mpv-easy@mpv.com"
           git config --global user.name "mpv-easy-cdn"
+          git config --global --type bool push.autoSetupRemote true
 
           git init
           git remote add origin https://github.com/mpv-easy/mpv-easy-cdn.git
@@ -41,3 +42,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.ref }}
           force_with_lease: true
+          force: true
