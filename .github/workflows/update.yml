@@ -30,12 +30,41 @@ jobs:
           git config --global --type bool push.autoSetupRemote true
 
           git init
-
-          git lfs install
-          git lfs track "*.zip"
-          git add .gitattributes
-
+          # git lfs install
+          # git lfs track "*.zip"
+          # git add .gitattributes
           git remote add origin https://github.com/mpv-easy/mpv-easy-cdn.git
+
+          # yt-dlp
+          curl -L -o yt-dlp.exe https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.exe
+
+          unzip mpv-easy-windows-full.zip -d mpv-easy-windows-full
+          rm mpv-easy-windows-full.zip
+          rm mpv-easy-windows-full/ffmpeg.exe
+          rm mpv-easy-windows-full/yt-dlp.exe
+          tar -cJf mpv-easy-windows-full.tar.xz -C mpv-easy-windows-full .
+
+          unzip mpv-modernx-windows-full.zip -d mpv-modernx-windows-full
+          rm mpv-modernx-windows-full.zip
+          rm mpv-modernx-windows-full/ffmpeg.exe
+          rm mpv-modernx-windows-full/yt-dlp.exe
+          tar -cJf mpv-modernx-windows-full.tar.xz -C mpv-modernx-windows-full .
+
+          unzip mpv-modernz-windows-full.zip -d mpv-modernz-windows-full
+          rm mpv-modernz-windows-full.zip
+          rm mpv-modernz-windows-full/ffmpeg.exe
+          rm mpv-modernz-windows-full/yt-dlp.exe
+          tar -cJf mpv-modernz-windows-full.tar.xz -C mpv-modernz-windows-full .
+
+          unzip mpv-uosc-windows-full.zip -d mpv-uosc-windows-full
+          rm mpv-uosc-windows-full.zip
+          rm mpv-uosc-windows-full/ffmpeg.exe
+          rm mpv-uosc-windows-full/yt-dlp.exe
+          tar -cJf mpv-uosc-windows-full.tar.xz -C mpv-uosc-windows-full .
+
+          unzip mpv-windows.zip -d mpv-windows.zip
+          rm mpv-easy-windows-full.zip
+          tar -cJf mpv-windows.tar.xz -C mpv-windows .
 
           git add .
           git commit -am "update by ci"
