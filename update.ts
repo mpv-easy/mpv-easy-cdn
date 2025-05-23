@@ -11,11 +11,11 @@ for (let name in DATA) {
   const { downloadURL } = DATA[name] as Record<string, string>
   if (downloadURL.endsWith('master.zip') || downloadURL.endsWith('main.zip')) {
     name = DATA[name].name + '.zip'
-  } else if (name.endsWith('.js') || name.endsWith('.lua')) {
+  } else if (downloadURL.endsWith('.js') || downloadURL.endsWith('.lua')) {
     name = downloadURL.split('/').at(-1)!
   }
 
-  if (['.js', '.lua', '.zip'].every(i => !downloadURL.endsWith(i))) {
+  if (!['.js', '.lua', '.zip'].some(i => downloadURL.endsWith(i))) {
     continue
   }
   try {
