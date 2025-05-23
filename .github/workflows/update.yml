@@ -86,6 +86,10 @@ jobs:
           git remote add origin https://github.com/mpv-easy/mpv-easy-cdn.git
           git add .
           git commit -am "update by ci"
+
+      - name: ls
+        run: |
+          ls -l
       - name: Push changes
         uses: ad-m/github-push-action@master
         if: github.ref == 'refs/heads/dev'

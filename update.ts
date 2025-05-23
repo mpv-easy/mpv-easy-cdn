@@ -14,6 +14,10 @@ for (let name in DATA) {
   } else if (name.endsWith('.js') || name.endsWith('.lua')) {
     name = downloadURL.split('/').at(-1)!
   }
+
+  if (['.js', '.lua', '.zip'].every(i => !downloadURL.endsWith(i))) {
+    continue
+  }
   try {
     await download(name, downloadURL)
   } catch (e) {
