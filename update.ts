@@ -1,7 +1,6 @@
 import { writeFileSync } from 'fs'
 
-// const DATA = JSON.parse(readFileSync('meta.json', 'utf8'))
-const DATA = JSON.parse(await fetch('https://raw.githubusercontent.com/mpv-easy/mpsm-scripts/meta/meta.json').then(i => i.text()))
+const DATA = JSON.parse(await fetch('https://raw.githubusercontent.com/mpv-easy/mpsm-scripts/main/meta.json').then(i => i.text()))
 
 async function download(name: string, url: string) {
   const bin = await fetch(url).then(i => i.arrayBuffer())
