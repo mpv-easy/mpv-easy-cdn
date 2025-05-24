@@ -1,0 +1,9 @@
+-- This script has been obsoleted by profile-cond.
+--
+-- mpv.conf:
+--
+-- [force-window]
+-- profile-cond=force_window ~= false
+-- profile-restore=copy-equal
+-- ...
+--

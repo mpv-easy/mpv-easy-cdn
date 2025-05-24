@@ -1,0 +1,15 @@
+-- This script has been obsoleted by profile-cond.
+--
+-- mpv.conf:
+--
+-- # 10 and 100 are arbitrary, remove conditions that don't fit your needs
+-- [autoloop]
+-- profile-cond=shuffle or (duration < 10 and playlist_count == 1) or playlist_count > 100
+-- profile-restore=copy-equal
+-- loop-playlist=inf
+--
+-- # optionally:
+-- [fastloop]
+-- profile-cond=loop_playlist == "inf" and playlist_count == 1
+-- profile-restore=copy-equal
+-- loop-file=inf

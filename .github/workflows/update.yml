@@ -1,0 +1,100 @@
+name: update
+
+permissions:
+  contents: write
+
+on:
+  push:
+    branches:
+      - dev
+
+defaults:
+  run:
+    shell: bash --noprofile --norc -CeEuo pipefail {0}
+
+jobs:
+  update:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - uses: robinraju/release-downloader@v1
+        with:
+          repository: "mpv-easy/mpv-easy"
+          latest: true
+          fileName: "*"
+
+      - name: update
+        run: |
+          ls -l
+          rm -rf -rf .git
+
+          git config --global init.defaultBranch main
+          git config --global user.email "mpv-easy@mpv.com"
+          git config --global user.name "mpv-easy-cdn"
+          git config --global --type bool push.autoSetupRemote true
+
+          # yt-dlp
+          curl -L -o yt-dlp.exe https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.exe
+
+          unzip mpv-easy-windows-full.zip -d mpv-easy-windows-full
+          rm -rf mpv-easy-windows-full.zip
+          rm -rf mpv-easy-windows-full/ffmpeg.exe
+          rm -rf mpv-easy-windows-full/yt-dlp.exe
+          tar -cJf mpv-easy-windows-full.tar.xz -C mpv-easy-windows-full .
+          rm -rf mpv-easy-windows-full
+
+          unzip mpv-modernx-windows-full.zip -d mpv-modernx-windows-full
+          rm -rf mpv-modernx-windows-full.zip
+          rm -rf mpv-modernx-windows-full/ffmpeg.exe
+          rm -rf mpv-modernx-windows-full/yt-dlp.exe
+          tar -cJf mpv-modernx-windows-full.tar.xz -C mpv-modernx-windows-full .
+          rm -rf mpv-modernx-windows-full
+
+          unzip mpv-modernz-windows-full.zip -d mpv-modernz-windows-full
+          rm -rf mpv-modernz-windows-full.zip
+          rm -rf mpv-modernz-windows-full/ffmpeg.exe
+          rm -rf mpv-modernz-windows-full/yt-dlp.exe
+          tar -cJf mpv-modernz-windows-full.tar.xz -C mpv-modernz-windows-full .
+          rm -rf mpv-modernz-windows-full
+
+          unzip mpv-uosc-windows-full.zip -d mpv-uosc-windows-full
+          rm -rf mpv-uosc-windows-full.zip
+          rm -rf mpv-uosc-windows-full/ffmpeg.exe
+          rm -rf mpv-uosc-windows-full/yt-dlp.exe
+          tar -cJf mpv-uosc-windows-full.tar.xz -C mpv-uosc-windows-full .
+          rm -rf mpv-uosc-windows-full
+
+          unzip mpv-windows.zip -d mpv-windows
+          rm -rf mpv-windows.zip
+          tar -cJf mpv-windows.tar.xz -C mpv-windows .
+          rm -rf mpv-windows
+
+      - name: ls
+        run: |
+          ls -l
+      - name: download scripts
+        run: |
+          bun update.ts
+
+      - name: commit
+        run: |
+          git init
+          git remote add origin https://github.com/mpv-easy/mpv-easy-cdn.git
+          git add .
+          git commit -am "update by ci"
+
+      - name: ls
+        run: |
+          ls -l
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        if: github.ref == 'refs/heads/dev'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
+          # force_with_lease: true
+          force: true
